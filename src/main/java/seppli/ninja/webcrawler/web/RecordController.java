@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import seppli.ninja.webcrawler.crawler.settings.model.Selector;
@@ -92,11 +92,11 @@ public class RecordController {
 	 * @param siteId the site id to redirect to the records page
 	 * @return the redirect string
 	 */
-	@PostMapping("/deleteRecord")
+	@RequestMapping("/deleteRecord")
 	public String deleteRecord(@RequestParam(name = "recordId") long recordId, @RequestParam(name = "siteId") long siteId) {
 		// delete if present
 		recordService.get(recordId).ifPresent(recordService::delete);
-		return "redirect: /records?siteId=" + siteId;
+		return "redirect:/records?siteId=" + siteId;
 	}
 
 }

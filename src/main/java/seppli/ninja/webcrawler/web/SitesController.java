@@ -21,7 +21,9 @@ import seppli.ninja.webcrawler.crawler.settings.io.SiteWriter;
 import seppli.ninja.webcrawler.crawler.settings.model.Settings;
 import seppli.ninja.webcrawler.crawler.settings.model.Site;
 import seppli.ninja.webcrawler.crawler.settings.model.Time;
+import seppli.ninja.webcrawler.db.model.SiteTable;
 import seppli.ninja.webcrawler.scheduler.Scheduler;
+import seppli.ninja.webcrawler.web.service.SiteService;
 
 /**
  * The site controller
@@ -46,6 +48,11 @@ public class SitesController {
 	private Scheduler scheduler;
 
 	/**
+	 * the site service
+	 */
+	private SiteService siteService;
+
+	/**
 	 * the date format to format th enext run time
 	 */
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM.yyyy");
@@ -57,9 +64,10 @@ public class SitesController {
 	 * @param scheduler the scheduler
 	 */
 	@Autowired
-	public SitesController(Settings settings, Scheduler scheduler) {
+	public SitesController(Settings settings, Scheduler scheduler, SiteService siteService) {
 		this.settings = settings;
 		this.scheduler = scheduler;
+		this.siteService = siteService;
 	}
 
 	/**
@@ -90,6 +98,26 @@ public class SitesController {
 		response.setHeader("Content-Disposition", "attachment; filename=\"siteConfig" + id + ".xml\"");
 		response.flushBuffer();
 	}
+
+	/**
+	 * Exports the site data as a csv
+	 * @param id the id
+	 * @param response the http response
+	 * @throws JAXBException
+	 * @throws IOException
+	 */
+	@GetMapping("/exportCsv")
+	public void exportCsv(@RequestParam(name = "siteId") long id, HttpServletResponse response) throws JAXBException, IOException {
+		Site site = settings.getSiteById(id).orElseThrow(() -> new IllegalArgumentException("Invalid site id: " + id));
+		SiteTable table = siteService.getByConfigId(id).orElse(new SiteTable(id));
+		String csvString = siteService.getCsv(table, site);
+		response.getOutputStream().print(csvString);
+		response.setContentType("application/csv");
+		response.setHeader("Content-Disposition", "attachment; filename=\"siteConfig" + id + ".csv\"");
+		response.flushBuffer();
+	}
+
+
 
 	/**
 	 * Formats the time list<br>

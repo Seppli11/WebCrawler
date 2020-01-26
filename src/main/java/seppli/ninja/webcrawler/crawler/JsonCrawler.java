@@ -52,12 +52,15 @@ public class JsonCrawler implements Crawler<JsonMethod> {
 			con.setRequestMethod(m.getRequestMethod().name());
 			con.connect();
 
+			if(con.getResponseCode() != 200) {
+				throw new CrawlerException("Couldn't get OK response: " + con.getResponseCode() + " " + con.getResponseMessage());
+			}
 			BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String jsonText = reader.lines().collect(Collectors.joining("\n"));
-
 			for (Selector selector : m.getSelectors()) {
 				String value = JsonPath.read(jsonText, selector.getSelector()).toString();
 				map.put(selector.getName(), value);
+				logger.info("Found \"{}\" -> \"{}\"", selector.getName(), value);
 			}
 			return map;
 		} catch (IOException e) {

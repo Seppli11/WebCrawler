@@ -72,7 +72,7 @@ public class Settings {
 				sitesWithoutIds.add(s);
 			}
 		}
-		int nextId = 0;
+		long nextId = 0;
 		for(Site s : sitesWithoutIds) {
 			//finds a id which isn't set
 			do {

@@ -91,7 +91,10 @@ public class CrawlerExecutor {
 			storeInDb(site, result);
 		} catch (CrawlerException e) {
 			logger.error("While crawling an error occured (url: \"{}\", crawler: {}, method: {})", site.getUrl(),
-					crawler.getClass().getName(), m.getClass().getName());
+					crawler.getClass().getName(), m.getClass().getName(), e);
+		} catch(Throwable e) {
+			logger.error("While crawling an error occured (url: \"{}\", crawler: {}, method: {})", site.getUrl(),
+					crawler.getClass().getName(), m.getClass().getName(), e);
 		}
 	}
 

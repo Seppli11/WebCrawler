@@ -21,7 +21,7 @@
 			</tr>
 			<tr th:each="site : ${sites}">
 				<td th:text="${site.id}"></td>
-				<td th:text="${site.url}"></td>
+				<td><a th:href="${site.url}" th:text="${site.url}"></a></td>
 				<td th:text="${site.getMethod().toHtmlString()}"></td>
 				<td th:text="${controller.formatTimeList(site.checkAt)}"></td>
 				<td th:text="${controller.getNextRunDate(site)}"></td>
@@ -29,6 +29,8 @@
 					<a class="btn btn-primary" th:href="@{/records(siteId=${site.id})}">Records</a>
 					<a class="btn btn-primary"
 						th:href="@{/exportConfig(siteId=${site.id})}">Export Config</a>
+					<a class="btn btn-primary"
+						th:href="@{/exportCsv(siteId=${site.id})}">Export Csv</a>
 				</td>
 				<td></td>
 			</tr>

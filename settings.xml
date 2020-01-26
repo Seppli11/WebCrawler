@@ -5,23 +5,28 @@
             <id>1</id>
             <url>http://tagesanzeiger.ch</url>
             <checkAt>
-                <time>0 */10 * * * *</time>
+                <time>0 */1 * * * *</time>
             </checkAt>
             <htmlMethod>
                 <selectors>
-                    <selector name="headerTitle">td a</selector>
+                    <selector name="Main Story">#topStoryA &gt; .featureStory &gt; h3</selector>
                 </selectors>
             </htmlMethod>
         </site>
         <site>
             <id>2</id>
-            <url>http://...</url>
+            <url>https://api.openrates.io/latest?base=CHF</url>
             <checkAt>
-                <time>0 */10 * * * *</time>
+                <time>0 */1 * * * *</time>
             </checkAt>
             <jsonMethod>
                 <selectors>
-                    <selector name="bookTitle">$.store.book[0].title</selector>
+                    <selector name="CAD">$.rates.CAD</selector>
+                    <selector name="EUR">$.rates.EUR</selector>
+                    <selector name="USD">$.rates.USD</selector>
+                    <selector name="JPY">$.rates.JPY</selector>
+                    <selector name="AUD">$.rates.AUD</selector>
+                    <selector name="GBP">$.rates.GBP</selector>
                 </selectors>
                 <requestMethod>GET</requestMethod>
             </jsonMethod>
