@@ -26,3 +26,6 @@ hs_err_pid*
 .project
 .classpath
 .mvn/
+mvnw
+mvnw.cmd
+target/
