@@ -1,5 +1,6 @@
 package seppli.ninja.webcrawler.db.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,7 +34,7 @@ public class SiteTable {
 	 * the records
 	 */
 	@OneToMany(mappedBy = "site", cascade = CascadeType.REMOVE)
-	private List<Record> recordList;
+	private List<Record> recordList = new ArrayList<>();
 
 	/**
 	 * the config id

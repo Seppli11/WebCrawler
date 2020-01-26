@@ -69,6 +69,13 @@
 			<artifactId>mariadb-java-client</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
