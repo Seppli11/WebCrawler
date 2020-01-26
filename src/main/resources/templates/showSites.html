@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Sites</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-4">
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container-fluid  bg-4 text-center">
+		<h1>Sites</h1>
+		<table class="table">
+			<tr>
+				<th>Config Id</th>
+				<th>Url</th>
+				<th>Method</th>
+				<th>Checked At</th>
+				<th>Next Run</th>
+				<th></th>
+			</tr>
+			<tr th:each="site : ${sites}">
+				<td th:text="${site.id}"></td>
+				<td th:text="${site.url}"></td>
+				<td th:text="${site.getMethod().toHtmlString()}"></td>
+				<td th:text="${controller.formatTimeList(site.checkAt)}"></td>
+				<td th:text="${controller.getNextRunDate(site)}"></td>
+				<td>
+					<a class="btn btn-primary" th:href="@{/records(siteId=${site.id})}">Records</a>
+					<a class="btn btn-primary"
+						th:href="@{/exportConfig(siteId=${site.id})}">Export Config</a>
+				</td>
+				<td></td>
+			</tr>
+		</table>
+	</div>
+
+	<footer class="container-fluid bg-4 text-center">
+		<p>&copy; Sebastian Zumbrunn</p>
+		<p>generated at [[${controller.formatDate(new java.util.Date())}]]</p>
+	</footer>
+
+</body>
+</html>

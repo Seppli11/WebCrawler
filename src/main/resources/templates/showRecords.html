@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Sites</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bg-4">
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container-fluid  bg-4 text-center">
+		<h1>
+			Records of [[${site.url}]]
+			<a class="btn btn-primary" th:href="@{/}">Back to Overview</a>
+		</h1>
+		<table class="table">
+			<tr>
+				<th>Url</th>
+				<th>Date</th>
+				<th th:each="title : ${titles}">[[${title}]]</th>
+			</tr>
+			<tr th:each="record : ${records}">
+				<td>
+					<a th:href="${record.url}" target="_blank">[[${record.url}]]</a>
+				</td>
+				<td th:text="${record.date}"></td>
+				<td th:each="data : ${record.dataList}">[[${data.value}]]</td>
+				<td>
+					<a class="btn btn-danger"
+						th:href="@{/deleteRecord(recordId=${record.id}, siteId=${site.id})}">Delete</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<footer class="container-fluid bg-4 text-center">
+		<p>&copy; Sebastian Zumbrunn</p>
+	</footer>
+
+</body>
+</html>

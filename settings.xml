@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings>
+    <sites>
+        <site>
+            <id>1</id>
+            <url>http://tagesanzeiger.ch</url>
+            <checkAt>
+                <time>0 */10 * * * *</time>
+            </checkAt>
+            <htmlMethod>
+                <selectors>
+                    <selector name="headerTitle">td a</selector>
+                </selectors>
+            </htmlMethod>
+        </site>
+        <site>
+            <id>2</id>
+            <url>http://...</url>
+            <checkAt>
+                <time>0 */10 * * * *</time>
+            </checkAt>
+            <jsonMethod>
+                <selectors>
+                    <selector name="bookTitle">$.store.book[0].title</selector>
+                </selectors>
+                <requestMethod>GET</requestMethod>
+            </jsonMethod>
+        </site>
+    </sites>
+</settings>
