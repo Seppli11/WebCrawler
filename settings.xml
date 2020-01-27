@@ -5,7 +5,7 @@
             <id>1</id>
             <url>http://tagesanzeiger.ch</url>
             <checkAt>
-                <time>0 */1 * * * *</time>
+                <time>0 */10 * * * *</time>
             </checkAt>
             <htmlMethod>
                 <selectors>
@@ -17,7 +17,7 @@
             <id>2</id>
             <url>https://api.openrates.io/latest?base=CHF</url>
             <checkAt>
-                <time>0 */1 * * * *</time>
+                <time>0 */10 * * * *</time>
             </checkAt>
             <jsonMethod>
                 <selectors>
